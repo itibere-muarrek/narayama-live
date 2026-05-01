@@ -1,4 +1,3 @@
-cat > package.json << 'EOF'
 {
   "name": "narayama-live",
   "version": "1.0.0",
@@ -13,4 +12,3 @@ cat > package.json << 'EOF'
     "react-dom": "18.2.0"
   }
 }
-EOF
