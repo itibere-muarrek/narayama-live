@@ -1,132 +1,106 @@
-.dashboard-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
+import Head from 'next/head';
+import styles from './dashboard.module.css';
 
-.dashboard-container h1 {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-  color: #333;
-}
+export default function Dashboard() {
+  const countries27 = [
+    { name: 'Argentina', status: 'balanced' },
+    { name: 'Austrália', status: 'up' },
+    { name: 'Áustria', status: 'up' },
+    { name: 'Bangladesh', status: 'down' },
+    { name: 'Bélgica', status: 'up' },
+    { name: 'Brasil', status: 'up' },
+    { name: 'Canadá', status: 'up' },
+    { name: 'China', status: 'up' },
+    { name: 'Cingapura', status: 'up' },
+    { name: 'Colômbia', status: 'balanced' },
+    { name: 'Coreia do Sul', status: 'up' },
+    { name: 'Dinamarca', status: 'up' },
+    { name: 'Egito', status: 'down' },
+    { name: 'Emirados Árabes', status: 'balanced' },
+    { name: 'Espanha', status: 'up' },
+    { name: 'EUA', status: 'up' },
+    { name: 'Finlândia', status: 'up' },
+    { name: 'França', status: 'up' },
+    { name: 'Grécia', status: 'balanced' },
+    { name: 'Holanda', status: 'up' },
+    { name: 'Índia', status: 'balanced' },
+    { name: 'Indonésia', status: 'balanced' },
+    { name: 'Itália', status: 'balanced' },
+    { name: 'Japão', status: 'up' },
+    { name: 'México', status: 'balanced' },
+    { name: 'Reino Unido', status: 'up' },
+    { name: 'Rússia', status: 'down' },
+  ];
 
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: 30px;
-}
+  const getArrow = (status) => {
+    switch(status) {
+      case 'up': return '⬆️';
+      case 'down': return '⬇️';
+      case 'balanced': return '↔️';
+      default: return '—';
+    }
+  };
 
-.sidebar {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  height: fit-content;
-}
+  const getColor = (status) => {
+    switch(status) {
+      case 'up': return '#2563eb';
+      case 'down': return '#dc2626';
+      case 'balanced': return '#eab308';
+      default: return '#6b7280';
+    }
+  };
 
-.sidebar h3 {
-  margin-bottom: 20px;
-  color: #333;
-}
+  return (
+    <>
+      <Head>
+        <title>Narayama Index - Índice Global (27 Países)</title>
+        <meta name="description" content="Índice de Sustentabilidade de 27 países" />
+      </Head>
 
-.country-btn {
-  display: block;
-  width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 10px;
-  border: 2px solid #e0e0e0;
-  background: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  text-align: left;
-}
+      <div className={styles.container}>
+        <section className={styles.header}>
+          <h1>📊 Índice Global - 27 Países</h1>
+          <p>Sustentabilidade Intergeneracional por País</p>
+        </section>
 
-.country-btn:hover {
-  border-color: #667eea;
-  color: #667eea;
-}
+        <section className={styles.legend}>
+          <div className={styles['legend-item']}>
+            <span style={{ color: '#2563eb', fontSize: '24px' }}>⬆️</span>
+            <span>Sustentabilidade</span>
+          </div>
+          <div className={styles['legend-item']}>
+            <span style={{ color: '#eab308', fontSize: '24px' }}>↔️</span>
+            <span>Equilíbrio</span>
+          </div>
+          <div className={styles['legend-item']}>
+            <span style={{ color: '#dc2626', fontSize: '24px' }}>⬇️</span>
+            <span>Insustentabilidade</span>
+          </div>
+        </section>
 
-.country-btn.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-color: #667eea;
-}
+        <section className={styles['countries-table']}>
+          <div className={styles['table-header']}>
+            <div className={styles['col-name']}>País</div>
+            <div className={styles['col-status']}>Status</div>
+          </div>
 
-.main-content {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
+          {countries27.map((country) => (
+            <div key={country.name} className={styles['table-row']}>
+              <div className={styles['col-name']}>{country.name}</div>
+              <div className={styles['col-status']}>
+                <span style={{ color: getColor(country.status), fontSize: '20px' }}>
+                  {getArrow(country.status)}
+                </span>
+              </div>
+            </div>
+          ))}
+        </section>
 
-.n-star-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 40px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.n-star-card h2 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-}
-
-.n-star-value {
-  font-size: 4rem;
-  font-weight: bold;
-  margin: 20px 0;
-}
-
-.status {
-  font-size: 1.2rem;
-  margin-top: 15px;
-}
-
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.metric-card {
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  border-left: 5px solid #667eea;
-}
-
-.metric-card h4 {
-  color: #667eea;
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-}
-
-.metric-value {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #333;
-  margin: 10px 0;
-}
-
-.metric-card small {
-  color: #999;
-  font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .n-star-value {
-    font-size: 3rem;
-  }
+        <section className={styles.footer}>
+          <p>🔐 Dados validados e em constante atualização</p>
+          <p><em>Status: Em desenvolvimento e testes</em></p>
+        </section>
+      </div>
+    </>
+  );
 }

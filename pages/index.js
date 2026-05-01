@@ -1,83 +1,92 @@
-import { useState } from 'react'
-import styles from './index.module.css'
+import Head from 'next/head';
+import styles from './index.module.css';
 
 export default function Home() {
-  const [email, setEmail] = useState('')
-  const [submitted, setSubmitted] = useState(false)
+  const countries = [
+    { name: 'Brasil', status: 'up', color: '#2563eb' },
+    { name: 'Argentina', status: 'balanced', color: '#eab308' },
+    { name: 'EUA', status: 'down', color: '#dc2626' },
+    { name: 'China', status: 'up', color: '#2563eb' },
+    { name: 'Japão', status: 'balanced', color: '#eab308' },
+  ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 3000)
-  }
+  const getArrow = (status) => {
+    switch(status) {
+      case 'up': return '⬆️';
+      case 'down': return '⬇️';
+      case 'balanced': return '↔️';
+      default: return '—';
+    }
+  };
 
   return (
-    <div className="home">
-      {/* Hero */}
-      <section className={styles.hero}>
-        <div className={styles['hero-content']}>
-          <h1>🌍 Narayama Index</h1>
-          <p className="subtitle">Medindo a Sustentabilidade Intergeracional Globalmente</p>
-          <p className="description">
-            O índice N* quantifica a capacidade de uma nação manter seu desenvolvimento sem comprometer gerações futuras.
-          </p>
-          <div className={styles['cta-buttons']}>
-            <a href="/dashboard" className={`${styles.btn} ${styles['btn-primary']}`}>Ver Dashboard</a>
-            <a href="/simulador" className={`${styles.btn} ${styles['btn-secondary']}`}>Tentar Simulador</a>
+    <>
+      <Head>
+        <title>Narayama Index - Medindo Sustentabilidade Intergeneracional</title>
+        <meta name="description" content="Índice de Sustentabilidade Intergeneracional Global" />
+      </Head>
+
+      <div className={styles.container}>
+        {/* HERO SECTION */}
+        <section className={styles.hero}>
+          <div className={styles['hero-content']}>
+            <h1>🌍 Narayama Index</h1>
+            <p className={styles.subtitle}>Medindo a Sustentabilidade Intergeneracional Globalmente</p>
+            <p className={styles.description}>
+              O Narayama Index quantifica a capacidade de uma nação manter seu desenvolvimento 
+              sem comprometer gerações futuras.
+            </p>
+            <p className={styles.status}>
+              <em>⏳ Status: Em desenvolvimento e testes</em>
+            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* About N* */}
-      <section className="about">
-        <h2>O que é N*?</h2>
-        <div className={styles.formula}>
-          <p><strong>N* = L × ∛(NGII × NCII × NSII)</strong></p>
-          <ul>
-            <li><strong>L:</strong> Fator de Globalização</li>
-            <li><strong>NGII:</strong> Índice Geracional</li>
-            <li><strong>NCII:</strong> Competitividade</li>
-            <li><strong>NSII:</strong> Sustentabilidade</li>
-          </ul>
-        </div>
-      </section>
+        {/* 5 PAÍSES COM INDICADORES */}
+        <section className={styles['countries-section']}>
+          <h2>Índice dos 5 Países Selecionados</h2>
+          <div className={styles['countries-grid']}>
+            {countries.map((country) => (
+              <div key={country.name} className={styles['country-card']}>
+                <div className={styles['country-header']}>
+                  <h3>{country.name}</h3>
+                  <span className={styles['arrow']} style={{ color: country.color }}>
+                    {getArrow(country.status)}
+                  </span>
+                </div>
+                <div className={styles['status-indicator']}>
+                  {country.status === 'up' && <p style={{ color: '#2563eb' }}>Sustentabilidade</p>}
+                  {country.status === 'balanced' && <p style={{ color: '#eab308' }}>Equilíbrio</p>}
+                  {country.status === 'down' && <p style={{ color: '#dc2626' }}>Insustentabilidade</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
-      {/* Stats */}
-      <section className={styles.stats}>
-        <div className={styles['stat-card']}>
-          <h3>27</h3>
-          <p>Países Analisados</p>
-        </div>
-        <div className={styles['stat-card']}>
-          <h3>4</h3>
-          <p>Testes de Falseabilidade</p>
-        </div>
-        <div className={styles['stat-card']}>
-          <h3>2024</h3>
-          <p>Dados Atualizados</p>
-        </div>
-      </section>
-
-      {/* Newsletter */}
-      <section className={styles.newsletter}>
-        <h2>Fique Atualizado</h2>
-        <form onSubmit={handleSubmit}>
-          <input 
-            type="email" 
-            placeholder="seu@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <button type="submit" className={`${styles.btn} ${styles['btn-primary']}`}>Inscrever-se</button>
-        </form>
-        {submitted && <p className="success">✓ Obrigado por se inscrever!</p>}
-      </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <p>&copy; 2026 Narayama Research. Todos os direitos reservados.</p>
-      </footer>
-    </div>
-  )
+        {/* EMAIL VALIDATION PARA 27 PAÍSES */}
+        <section className={styles['validation-section']}>
+          <h2>Acesse o Índice de 27 Países</h2>
+          <p>Valide seu email para ter acesso aos dados completos de sustentabilidade global.</p>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            alert('Funcionalidade de validação em desenvolvimento');
+          }}>
+            <input 
+              type="email" 
+              placeholder="seu@email.com" 
+              required 
+              className={styles['email-input']}
+            />
+            <button type="submit" className={styles['submit-btn']}>
+              Validar Email
+            </button>
+          </form>
+          <p className={styles['countries-list-hint']}>
+            27 países: Argentina, Austrália, Áustria, Bangladesh, Bélgica, Brasil, Canadá, China, Cingapura, Colômbia, Coreia do Sul, Dinamarca, Egito, Emirados Árabes, Espanha, EUA, Finlândia, França, Grécia, Holanda, Índia, Indonésia, Irã, Itália, Japão, México, Reino Unido, Rússia, Suécia...
+          </p>
+        </section>
+      </div>
+    </>
+  );
 }
