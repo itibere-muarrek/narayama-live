@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './simulador.css'
+import styles from './simulador.module.css'
 
 export default function Simulador() {
   const [ngii, setNgii] = useState(4.6)
@@ -24,7 +24,7 @@ export default function Simulador() {
 
       <div className="sim-container">
         <div className="sim-controls">
-          <div className="control-group">
+          <div className={styles['control-group']}>
             <label>NGII (Geracional): {ngii.toFixed(2)}</label>
             <input 
               type="range" 
@@ -33,11 +33,11 @@ export default function Simulador() {
               step="0.1"
               value={ngii}
               onChange={(e) => setNgii(parseFloat(e.target.value))}
-              className="slider"
+              className={styles.slider}
             />
           </div>
 
-          <div className="control-group">
+          <div className={styles['control-group']}>
             <label>NCII (Competitividade): {ncii.toFixed(2)}</label>
             <input 
               type="range" 
@@ -46,11 +46,11 @@ export default function Simulador() {
               step="0.1"
               value={ncii}
               onChange={(e) => setNcii(parseFloat(e.target.value))}
-              className="slider"
+              className={styles.slider}
             />
           </div>
 
-          <div className="control-group">
+          <div className={styles['control-group']}>
             <label>NSII (Sustentabilidade): {nsii.toFixed(2)}</label>
             <input 
               type="range" 
@@ -59,11 +59,11 @@ export default function Simulador() {
               step="0.1"
               value={nsii}
               onChange={(e) => setNsii(parseFloat(e.target.value))}
-              className="slider"
+              className={styles.slider}
             />
           </div>
 
-          <div className="control-group">
+          <div className={styles['control-group']}>
             <label>L (Globalização): {l.toFixed(2)}</label>
             <input 
               type="range" 
@@ -72,19 +72,19 @@ export default function Simulador() {
               step="0.01"
               value={l}
               onChange={(e) => setL(parseFloat(e.target.value))}
-              className="slider"
+              className={styles.slider}
             />
           </div>
         </div>
 
         <div className="sim-result">
-          <div className="result-card">
+          <div className={styles['result-card']}>
             <h2>Resultado</h2>
             <p className="formula">N* = L × ∛(NGII × NCII × NSII)</p>
             <div className="result-value" style={{ color: status.color }}>
               {n_star.toFixed(2)}
             </div>
-            <p className="result-status" style={{ color: status.color }}>
+            <p className={styles['result-status']} style={{ color: status.color }}>
               {status.text}
             </p>
             <p className="result-desc">
@@ -102,19 +102,19 @@ export default function Simulador() {
       <div className="scenarios">
         <h2>Cenários Pré-configurados</h2>
         <button 
-          className="scenario-btn"
+          className={styles['scenario-btn']}
           onClick={() => { setNgii(4.6); setNcii(8.5); setNsii(19); setL(0.63); }}
         >
           🇧🇷 Brasil 2024
         </button>
         <button 
-          className="scenario-btn"
+          className={styles['scenario-btn']}
           onClick={() => { setNgii(6.5); setNcii(9.5); setNsii(25); setL(0.8); }}
         >
           🌟 Cenário Ideal
         </button>
         <button 
-          className="scenario-btn"
+          className={styles['scenario-btn']}
           onClick={() => { setNgii(2); setNcii(5); setNsii(10); setL(0.4); }}
         >
           ⚠️ Cenário Crítico

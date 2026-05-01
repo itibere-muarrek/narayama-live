@@ -1,4 +1,4 @@
-import './metodologia.css'
+import styles from './metodologia.module.css'
 
 export default function Metodologia() {
   return (
@@ -7,15 +7,15 @@ export default function Metodologia() {
       <p className="subtitle">Compreenda como medimos a sustentabilidade intergeracional</p>
 
       <div className="content">
-        <section className="section">
+        <section className={styles.section}>
           <h2>🎯 A Fórmula Principal</h2>
-          <div className="formula-box">
+          <div className={styles['formula-box']}>
             <p className="big-formula">N* = L × ∛(NGII × NCII × NSII)</p>
           </div>
           <p>O índice N* (Narayama Index) é uma medida sintética que combina três dimensões críticas da sustentabilidade através de uma média geométrica ponderada.</p>
         </section>
 
-        <section className="section">
+        <section className={styles.section}>
           <h2>📊 Os 6 Componentes</h2>
           
           <div className="component">
@@ -55,7 +55,7 @@ export default function Metodologia() {
           </div>
         </section>
 
-        <section className="section">
+        <section className={styles.section}>
           <h2>✅ Testes de Falseabilidade</h2>
           <p>O modelo é científico porque pode ser refutado por 4 testes rigorosos:</p>
           
@@ -80,7 +80,7 @@ export default function Metodologia() {
           </div>
         </section>
 
-        <section className="section">
+        <section className={styles.section}>
           <h2>🌍 Fontes de Dados</h2>
           <ul>
             <li><strong>Banco Mundial:</strong> PIB, comércio, população</li>
@@ -94,10 +94,10 @@ export default function Metodologia() {
 
         <section className="section cta">
           <h2>Quer explorar mais?</h2>
-          <div className="cta-buttons">
-            <a href="/simulador" className="btn btn-primary">Simular Cenários</a>
-            <a href="/dashboard" className="btn btn-secondary">Ver Dashboard</a>
-            <a href="/faq" className="btn btn-secondary">Perguntas Frequentes</a>
+          <div className={styles['cta-buttons']}>
+            <a href="/simulador" className={`${styles.btn} ${styles['btn-primary']}`}>Simular Cenários</a>
+            <a href="/dashboard" className={`${styles.btn} ${styles['btn-secondary']}`}>Ver Dashboard</a>
+            <a href="/faq" className={`${styles.btn} ${styles['btn-secondary']}`}>Perguntas Frequentes</a>
           </div>
         </section>
       </div>

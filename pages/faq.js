@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './faq.css'
+import styles from './faq.module.css'
 
 const FAQS = [
   {
@@ -52,9 +52,9 @@ export default function FAQ() {
       <h1>❓ Perguntas Frequentes</h1>
       <p className="subtitle">Respostas sobre o Índice N* e como usar</p>
 
-      <div className="faq-container">
+      <div className={styles['faq-container']}>
         {FAQS.map((item, idx) => (
-          <div key={idx} className="faq-item">
+          <div key={idx} className={styles['faq-item']}>
             <button
               className={`faq-question ${openIndex === idx ? 'open' : ''}`}
               onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
@@ -63,7 +63,7 @@ export default function FAQ() {
               <span className="toggle">{openIndex === idx ? '−' : '+'}</span>
             </button>
             {openIndex === idx && (
-              <div className="faq-answer">
+              <div className={styles['faq-answer']}>
                 <p>{item.a}</p>
               </div>
             )}

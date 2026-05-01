@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './dashboard.css'
+import styles from './dashboard.module.css'
 
 const COUNTRIES = [
   { name: 'Brasil', n_star: 5.72, ngii: 4.60, ncii: 8.52, nsii: 18.98, status: '🟢' },
@@ -36,26 +36,26 @@ export default function Dashboard() {
           <h2>{country.name}</h2>
           <div className="metric-card large">
             <p className="metric-label">Índice N*</p>
-            <p className="metric-value">{country.n_star.toFixed(2)}</p>
+            <p className={styles['metric-value']}>{country.n_star.toFixed(2)}</p>
             <p className="metric-description">
               {country.n_star > 5.5 ? '✓ Sustentável' : country.n_star > 4 ? '⚠ Moderado' : '✗ Crítico'}
             </p>
           </div>
 
-          <div className="metrics-grid">
-            <div className="metric-card">
+          <div className={styles['metrics-grid']}>
+            <div className={styles['metric-card']}>
               <p className="metric-label">NGII</p>
-              <p className="metric-value">{country.ngii.toFixed(2)}</p>
+              <p className={styles['metric-value']}>{country.ngii.toFixed(2)}</p>
               <p className="metric-desc">Geracional</p>
             </div>
-            <div className="metric-card">
+            <div className={styles['metric-card']}>
               <p className="metric-label">NCII</p>
-              <p className="metric-value">{country.ncii.toFixed(2)}</p>
+              <p className={styles['metric-value']}>{country.ncii.toFixed(2)}</p>
               <p className="metric-desc">Competitividade</p>
             </div>
-            <div className="metric-card">
+            <div className={styles['metric-card']}>
               <p className="metric-label">NSII</p>
-              <p className="metric-value">{country.nsii.toFixed(2)}</p>
+              <p className={styles['metric-value']}>{country.nsii.toFixed(2)}</p>
               <p className="metric-desc">Sustentabilidade</p>
             </div>
           </div>
