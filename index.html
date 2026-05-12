@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AINU - Narayama Sistêmico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .quick-view {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .quick-view h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table thead {
+            background: #f5f5f5;
+            border-bottom: 2px solid #667eea;
+        }
+
+        table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        table tbody tr:hover {
+            background: #f9f9f9;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .status.alerta {
+            background: #ffe66d;
+            color: #333;
+        }
+
+        .status.critico {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .status.colapso {
+            background: #8b0000;
+            color: white;
+        }
+
+        .status.oportunidade {
+            background: #51cf66;
+            color: white;
+        }
+
+        .status.incerto {
+            background: #a0a0a0;
+            color: white;
+        }
+
+        .status.ilusao {
+            background: #ffa94d;
+            color: white;
+        }
+
+        .cta-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 10px;
+            max-width: 400px;
+            margin: 20px auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .email-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .email-form input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .email-form button {
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .email-form button:hover {
+            background: #764ba2;
+        }
+
+        .full-table {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        .full-table.visible {
+            display: block;
+        }
+
+        .full-table h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .region-group {
+            margin-bottom: 40px;
+        }
+
+        .region-title {
+            background: #f5f5f5;
+            padding: 12px;
+            border-left: 4px solid #667eea;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            table th, table td {
+                padding: 8px;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .email-form input {
+                min-width: 100%;
+            }
+
+            .cta-section {
+                padding: 20px;
+            }
+        }
+
+        .logo {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .consent-checkbox {
+            margin: 15px 0;
+        }
+
+        .consent-checkbox label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+        }
+
+        .consent-checkbox input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .small-text {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .skip-button {
+            background: #ccc;
+            color: #333;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .skip-button:hover {
+            background: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🌍</div>
+            <h1>Índice de Narayama Sistêmico</h1>
+            <p>Medindo a Sustentabilidade Intergeracional de 28 Países (1990–2024)</p>
+            <p style="font-size: 0.9em; margin-top: 15px; opacity: 0.9;">
+                <strong>Status:</strong> Online e Atualizado | <strong>Dados:</strong> 2024 | <strong>Próxima atualização:</strong> Toda sexta-feira 14:00 (São Paulo)
+            </p>
+        </header>
+
+        <!-- 6 PAÍSES DASHBOARD -->
+        <div class="quick-view">
+            <h2>Visão Rápida: 6 Países Principais</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cod</th>
+                        <th>País</th>
+                        <th>NGII 2024</th>
+                        <th>N*</th>
+                        <th>Fase</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="table-6">
+                </tbody>
+            </table>
+            <div style="text-align: center; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+                <strong>>>> Veja a tabela completa de 28 países abaixo <<<</strong>
+            </div>
+        </div>
+
+        <!-- EMAIL VALIDATION -->
+        <div class="cta-section">
+            <h3>Deseja ver a tabela completa de 28 países?</h3>
+            <p>Por favor, preencha seu email:</p>
+
+            <div class="email-form">
+                <input type="email" id="email1" placeholder="Seu email" required>
+                <input type="email" id="email2" placeholder="Confirme seu email" required>
+                <button onclick="validarEmail()">Validar Email</button>
+                <button onclick="skipValidation()" class="skip-button">Pular</button>
+            </div>
+
+            <div class="consent-checkbox">
+                <label>
+                    <input type="checkbox" id="consent" checked>
+                    Desejo receber atualizações sobre:
+                    <br><span style="font-size: 0.9em; margin-left: 28px;">• Novos dados quando disponíveis • Melhorias do AINU.SYSTEMS</span>
+                </label>
+            </div>
+
+            <p class="small-text">
+                Respeitamos sua privacidade. Seu email NÃO será armazenado sem seu consentimento.
+                <br>Se você não aceitar receber atualizações, pode acessar a tabela de todas as formas.
+            </p>
+        </div>
+
+        <!-- TABELA 28 PAÍSES -->
+        <div class="full-table" id="fullTable">
+            <h2>Tabela Completa: 28 Países (Continentes)</h2>
+
+            <div id="tableContent"></div>
+
+            <div style="margin-top: 40px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">Legenda:</h3>
+                <p><strong>N* > 1,3</strong> = Superávit Geracional (Expansão)</p>
+                <p><strong>0,9 < N* ≤ 1,3</strong> = Equilíbrio Sustentável</p>
+                <p><strong>0,5 < N* ≤ 0,9</strong> = Equilíbrio Frágil (Alerta)</p>
+                <p><strong>N* ≤ 0,5</strong> = Rarefação Sistêmica (Crítico)</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>AINU-Narayama v3.1.0 | Desenvolvido com integridade total | Dados e Fórmulas sem farsa</p>
+            <p>Acesse <strong>ainu.systems</strong> para dashboard completo, simulador e análises avançadas</p>
+        </footer>
+    </div>
+
+    <script>
+        let dadosCompletos = null;
+        let dados6 = null;
+        let emailValidado = false;
+
+        // Carregar dados
+        Promise.all([
+            fetch('data/paises_28.json').then(r => r.json()),
+            fetch('data/paises_6.json').then(r => r.json())
+        ]).then(([dados28, dados6temp]) => {
+            dadosCompletos = dados28;
+            dados6 = dados6temp;
+            exibirTabela6();
+            exibirTabela28();
+        });
+
+        function exibirTabela6() {
+            if (!dados6) return;
+            const tbody = document.getElementById('table-6');
+            tbody.innerHTML = dados6.map(p => `
+                <tr>
+                    <td>${p.cod}</td>
+                    <td><strong>${p.pais}</strong></td>
+                    <td>${p.ngii_2024.toFixed(2)}</td>
+                    <td><strong>${p.n_estrela.toFixed(4)}</strong></td>
+                    <td>${p.fase}</td>
+                    <td><span class="status ${getStatusClass(p.status)}">${p.status}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        function exibirTabela28() {
+            if (!dadosCompletos) return;
+
+            const regioes = {
+                'AMÉRICA DO SUL': ['+55', '+54', '+56', '+57', '+51', '+598'],
+                'AMÉRICA DO NORTE': ['+52', '+1'],
+                'EUROPA': ['+49', '+34', '+33', '+39', '+44', '+7'],
+                'ÁSIA': ['+84', '+86', '+81', '+91', '+62', '+66', '+82', '+886', '+60'],
+                'ÁFRICA': ['+27', '+20', '+234'],
+                'ORIENTE MÉDIO': ['+98'],
+                'OCEANIA': ['+61']
+            };
+
+            let html = '';
+
+            for (const [regiao, cods] of Object.entries(regioes)) {
+                html += `<div class="region-group">`;
+                html += `<div class="region-title">${regiao}</div>`;
+                html += `<table>
+                    <thead>
+                        <tr>
+                            <th>Cod</th>
+                            <th>País</th>
+                            <th>NGII 2000</th>
+                            <th>Var%</th>
+                            <th>NGII 2024</th>
+                            <th>Var% Proj</th>
+                            <th>N*</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+                cods.forEach(cod => {
+                    const p = dadosCompletos.find(x => x.cod === cod);
+                    if (p) {
+                        html += `<tr>
+                            <td>${p.cod}</td>
+                            <td><strong>${p.pais}</strong></td>
+                            <td>${p.ngii_2000.toFixed(2)}</td>
+                            <td>${p.var_2000_2024}%</td>
+                            <td>${p.ngii_2024.toFixed(2)}</td>
+                            <td>${p.var_2024_2051}%</td>
+                            <td><strong>${p.n_estrela.toFixed(4)}</strong></td>
+                            <td><span class="status ${getStatusClass(p.status)}">${p.status}</span></td>
+                        </tr>`;
+                    }
+                });
+
+                html += `</tbody></table></div>`;
+            }
+
+            document.getElementById('tableContent').innerHTML = html;
+        }
+
+        function validarEmail() {
+            const email1 = document.getElementById('email1').value;
+            const email2 = document.getElementById('email2').value;
+
+            if (!email1 || !email2) {
+                alert('Por favor, preencha ambos os campos de email');
+                return;
+            }
+
+            if (email1 !== email2) {
+                alert('Os emails não coincidem');
+                return;
+            }
+
+            // Validação simples de email
+            if (!email1.includes('@')) {
+                alert('Email inválido');
+                return;
+            }
+
+            emailValidado = true;
+            mostrarTabela28();
+        }
+
+        function skipValidation() {
+            emailValidado = true;
+            mostrarTabela28();
+        }
+
+        function mostrarTabela28() {
+            document.getElementById('fullTable').classList.add('visible');
+            document.querySelector('.cta-section').style.display = 'none';
+            window.scrollTo(0, document.getElementById('fullTable').offsetTop - 100);
+        }
+
+        function getStatusClass(status) {
+            const map = {
+                'ALERTA': 'alerta',
+                'CRÍTICO': 'critico',
+                'COLAPSO': 'colapso',
+                'OPORTUNIDADE': 'oportunidade',
+                'INCERTO': 'incerto',
+                'ILUSÃO': 'ilusao'
+            };
+            return map[status] || 'alerta';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "narayama-live",
+  "version": "3.1.0",
+  "description": "AINU-Narayama Public Website - Static HTML + JSON",
+  "type": "module",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "echo 'Deploy to Vercel or Netlify with: vercel deploy'"
+  },
+  "keywords": [
+    "narayama",
+    "ainu",
+    "demographic",
+    "sustainability"
+  ],
+  "author": "AINU Systems",
+  "license": "MIT"
+}

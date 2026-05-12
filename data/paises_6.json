@@ -1,0 +1,50 @@
+[
+  {
+    "cod": "+49",
+    "pais": "Alemanha",
+    "ngii_2024": 0.78,
+    "n_estrela": 0.6323,
+    "fase": "3 → 4",
+    "status": "CRÍTICO"
+  },
+  {
+    "cod": "+54",
+    "pais": "Argentina",
+    "ngii_2024": 1.08,
+    "n_estrela": 0.7062,
+    "fase": "2 → 3",
+    "status": "ALERTA"
+  },
+  {
+    "cod": "+55",
+    "pais": "Brasil",
+    "ngii_2024": 1.02,
+    "n_estrela": 0.6952,
+    "fase": "2 → 3",
+    "status": "ALERTA"
+  },
+  {
+    "cod": "+86",
+    "pais": "China",
+    "ngii_2024": 0.77,
+    "n_estrela": 0.6460,
+    "fase": "2 → 3",
+    "status": "ALERTA"
+  },
+  {
+    "cod": "+1",
+    "pais": "Estados Unidos",
+    "ngii_2024": 1.15,
+    "n_estrela": 0.9320,
+    "fase": "2 → 3",
+    "status": "ALERTA"
+  },
+  {
+    "cod": "+81",
+    "pais": "Japão",
+    "ngii_2024": 0.72,
+    "n_estrela": 0.5830,
+    "fase": "4 → 5",
+    "status": "COLAPSO"
+  }
+]
